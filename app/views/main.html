@@ -1,9 +1,38 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div id="route-home">
+    <!--<input type="text" value="" ng-model="home" />-->
+</div>
+
+<div id="route-steps">
+    <div class="steps">
+        <div id="step-{{$index}}" class="step" ng-repeat="waypoint in waypoints">
+
+            <div class="row">
+                <div class="span1" route-leg-canvas last="{{$last}}" first="{{$first}}"></div>
+                <div class="span11">
+                    <div ng-hide="editing" ng-click="editing = true">
+                        <h4>{{waypoint.end_address}}</h4>
+                        <div class="row">
+                            <div class="span5">
+                                <small class="muted">Fahrtzeit: ca. {{waypoint.duration.text}}</small>
+                            </div>
+                            <div class="span6">
+                                <small class="muted">Entfernung: {{waypoint.distance.text}}</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info alert-block" ng-show="editing">
+                        <button type="button" class="close" ng-click="editing = false">&times;</button>
+                        <form ng-submit="editing = false; waypointsUpdated();" class="form-inline">
+                            <input type="text" class="span6" ng-model="waypoint.end_address" placeholder="{{waypoint.end_address}}" ng-required/>
+                            <button class="btn btn-success" type="submit">Save</button>
+                            <button class="btn btn-danger" type="button" ng-click="editing = false">Cancel</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
